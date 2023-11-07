@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Autentificacion",
-    "slug": "Autentificacion",
+    "name": "Facebook",
+    "slug": "Facebook",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -15,18 +15,28 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.jack625a.Facebook"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff",
-        "hermesEnabled": false
-        
-      }
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.jack625a.Facebook"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "scheme": [
+      "Facebook",
+      "fb302576695968837"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "8c8e2a61-6956-43e1-9712-103acfb6c4b3"
+      }
     }
   }
 }
+
