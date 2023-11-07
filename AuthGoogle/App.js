@@ -13,8 +13,7 @@ WebBrowser.maybeCompleteAuthSession();
 export default function App() {
     const [userInfo, setUserInfo]=React.useState(null);
     const [request,response,promptAsyn]=Google.useAuthRequest({
-      
-    });
+      });
 
 const obtenerSesionUser=async()=>{
   const data=await AsyncStorage.getItem("@user");

@@ -18,7 +18,7 @@ const Data=async()=>{
       'https://api.airtable.com/v0//Productos',
       {
         headers:{
-          Authorization: `Bearer token`,
+          Authorization: `Bearer `,
         },
       }
     );
