@@ -8,8 +8,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 WebBrowser.maybeCompleteAuthSession();
 
-//ClientID ios 771801397538-0a6dmd3j252v0htmt9vkuq4lq96k0nl6.apps.googleusercontent.com
-//ClientId android 771801397538-p8c6gol2sm8gf0f3735d1ta0ueqkrgms.apps.googleusercontent.com
 export default function App() {
     const [userInfo, setUserInfo]=React.useState(null);
     const [request,response,promptAsyn]=Google.useAuthRequest({
