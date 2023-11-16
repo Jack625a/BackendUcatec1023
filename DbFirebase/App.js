@@ -4,6 +4,10 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, ScrollView,Button,TouchableOpacity, Modal, TextInput, Pressable} from 'react-native';
 import {initializeApp} from 'firebase/app';
 import {getDatabase, ref, onValue, push, set} from 'firebase/database';
+//Importacion Dependencias para Notificaciones
+import { registerIndieID, unregisterIndieDevice } from 'native-notify';
+import axios from 'axios';
+import { v4 as uuidv4 } from 'uuid';
 
 const FirebaseData=()=>{
   const [productData, setProductData]=useState([]);
@@ -12,6 +16,13 @@ const FirebaseData=()=>{
   const [nameUser, setNameUser]=useState("");
   const [modalVisible,setModalVisible]=useState(false);
   const [estado,setEstado]=useState("Pendiente");
+  const [UseridPush, setUseridPush]=useState("");
+
+  //Funcion para generar el UserId
+  const generarUserId=()=>{
+    return uuidv4();
+  };
+
   
   const firebaseconfig={
       
@@ -53,9 +64,16 @@ const FirebaseData=()=>{
 const ProductSelection=(product)=>{
   setSelectProduct(product);
   setModalVisible(true);
+  const newUserIdPush=generarUserId();
+  setUseridPush(newUserIdPush);
 };
 
+//Funcion para CrearUserId
+
+
 const orderRequest=()=>{
+  
+  registerIndieID (UseridPush,  , '  ');
   if(selectProduct && cantidad>0 && nameUser !==""){
     const orderData={
       NombreProducto: selectProduct.nombre,
@@ -64,6 +82,7 @@ const orderRequest=()=>{
       Total: cantidad*selectProduct.precio,
       Cliente: nameUser,
       Estado: "Pendiente",
+      idPush: UseridPush,
       
     };
   const newOrderRef=push(ordersRef);
@@ -80,7 +99,8 @@ const orderRequest=()=>{
 
 return(
   <View style={styles.container}>
-      <Text style={styles.titulo}>Productos</Text>
+
+       <Text style={styles.titulo}>Productos</Text>
       <View style={styles.productContainer}>
         {productData.map((product)=>(
           <TouchableOpacity 
@@ -147,6 +167,7 @@ return(
               <Button
                 title='Cerrar'
                 onPress={()=>setModalVisible(false)}
+
                 styles={styles.boton}/>
           </View>
         </View>

@@ -10,7 +10,7 @@ WebBrowser.maybeCompleteAuthSession();
 export default function App() {
   const [user,setUser]=useState(null);
   const [request,response,promptAsync]=Facebook.useAuthRequest({
-    clientId: "302576695968837",
+    clientId: "",
   });
 
   useEffect(()=>{

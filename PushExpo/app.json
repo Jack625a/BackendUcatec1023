@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "DbFirebasePush",
-    "slug": "DbFirebasePush",
+    "name": "PushExpo",
+    "slug": "PushExpo",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -15,23 +15,16 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "com.jack625a.DbFirebasePush"
+      "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      },
-      "package": "com.jack625a.DbFirebasePush"
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    },
-    "extra": {
-      "eas": {
-        "projectId": "48b32909-dad2-4a2b-a6fa-4d49de87f38c"
-      }
     }
   }
 }

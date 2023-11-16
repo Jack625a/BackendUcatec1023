@@ -3,15 +3,23 @@ import { StyleSheet, Text, View,TouchableOpacity,FlatList } from 'react-native';
 import React, {useEffect,useState} from 'react';
 import {initializeApp} from 'firebase/app';
 import {getDatabase,ref,onValue,update} from 'firebase/database';
+//Dependencias de la notificacion Push
+import registerNNPushToken from 'native-notify';
+import axios from 'axios';
+
+import { registerIndieID, unregisterIndieDevice } from 'native-notify';
+
 
 const PedidosScreen=()=>{
   const [pedidos,setPedidos]=useState([]);
   const [firebaseInitialized, setFirebaseInitialized]=useState(false);
   const [seleccionPedidoId,setSeleccionPedidoId]=useState(null);
   let database;
+  //Conexion con el servidor
+  registerNNPushToken(, '');
 
   const firebaseConfig = {
-    
+   
   };
   
   useEffect(()=>{
@@ -39,13 +47,23 @@ const PedidosScreen=()=>{
     });
   },[]);
 
-const actualizacionEstado=(pedidoId, nuevoEstado)=>{
+const actualizacionEstado=(pedidoId, nuevoEstado, idPush)=>{
   const database=getDatabase();
   const pedidoRef=ref(database,`Pedidos/${pedidoId}`);
+  const Titulo='UCATEC BACKEND';
+  const Mensaje=nuevoEstado;
 
+  
   update(pedidoRef,{
     Estado: nuevoEstado,
   });
+  axios.post(`https://app.nativenotify.com/api/indie/notification`, {
+      subID: idPush,
+      appId: ,
+      appToken: '',
+      title: Titulo,
+      message: Mensaje,
+ });
 
 };
 
@@ -64,15 +82,16 @@ return(
          <Text>Precio Producto: {item.Precio} </Text>
          <Text>Total: {item.Total} </Text>
          <Text>Estado: {item.Estado} </Text>
+         <Text>idPush:{item.idPush} </Text>
          <TouchableOpacity
           style={styles.estadoBoton}
-          onPress={()=>actualizacionEstado(item.id,"Confirmado")}
+          onPress={()=>actualizacionEstado(item.id,"Confirmado",item.idPush)}
          >
           <Text style={styles.textoBoton} >Confirmar</Text>
          </TouchableOpacity>
          <TouchableOpacity
           style={styles.estadoBoton}
-          onPress={()=>actualizacionEstado(item.id,"Rechazado")}
+          onPress={()=>actualizacionEstado(item.id,"Rechazado", item.idPush)}
          >
           <Text style={styles.textoBoton}>Rechazar</Text>
          </TouchableOpacity>
